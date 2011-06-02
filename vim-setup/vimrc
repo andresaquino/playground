@@ -1,0 +1,655 @@
+" RC vim
+" vim: set ts=2 sw=2 sts=2 et si ai:
+
+" vimrc - configuracion del editor VIM
+" =
+"
+" Andres Aquino <andres.aquino@gmail.com>
+" StrategyLabs!
+"
+" Notes:
+" 1- use what ever you want for indenting, but use spaces for aligning
+" 2- indent !
+" 3- follow the best practices for coding
+"
+" Links:
+" http://www.iovene.com/tabs-vs-spaces-the-end-of-the-debate/
+" http://www.iovene.com/how-to-write-robust-code/
+"
+
+" Preferir opciones del Vim sobre las de Vi
+set nocompatible
+
+"
+set backspace=indent,eol,start
+
+" no archivos de backup (archivo~)
+set nobackup
+
+" historial de 50 lineas
+set history=50
+
+" mostrar barra de informacion
+set ruler
+
+" mostrar comandos incompletos
+set showcmd
+set showmatch               " Show matching brackets.
+set ignorecase smartcase    " Do case insensitive matching
+"set smartcase					    " Do smart case matching
+set hlsearch					      " highlight search items in text
+set incsearch					      " search as search term is being typed
+set showmatch					      " show matching brackets 
+set autowrite					      " Automatically save before commands like :next and
+
+" Solo ISO-8859-1 y UTF-8
+set encoding=UTF-8
+set termencoding=UTF-8
+set fileencoding=UTF-8
+set fileencodings=UTF-8
+
+" Parametros de edicion, tamaño del tabulador a 3 espacios
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+"set expandtab 
+set listchars=tab:>-,eol:$,trail:_,extends:>,precedes:<
+
+" autoindentar "inteligente"
+set smartindent
+set autoindent
+
+" no corte de linea
+set nowrap
+
+" numeros de linea
+set number
+"set statusline=%F%m%r%h%w\ [FileFormat=%{&ff}]\ [FileType=%Y]\ [\%03.3b\|\%02.2B]\ [Linea=%04l,%04v]\ [%p%%]
+set statusline=[%{&ff}\|%Y]\ [c\%03.3b\|x\%03.2B]%=\ %F%m%r%h%w\ [%04l,%04v:%03.3p%%]
+set laststatus=2
+
+" usar sintaxis identificando el tipo de archivo
+"colorscheme zellner
+"colorscheme desert
+" Por la contraluz de la office NEXTEL, mejor uso este esquema temporalmente
+colorscheme zellner
+syntax enable
+syntax on
+
+if has("autocmd")
+  filetype plugin indent on
+  augroup vimrcEx
+  au!
+  autocmd FileType text setlocal textwidth=70
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+  augroup END
+endif " has("autocmd")
+
+" en funcion
+if !exists("autocommands_loaded")
+   let autocommands_loaded = 1
+   " para el php
+   au BufNewFile *.php call PHPComments()
+	
+	" para el java
+   au BufNewFile *.java call JAVAComments()
+
+	" para el ruby
+   au BufNewFile *.rb call RUBYComments()
+	
+   " para el html
+   au BufNewFile *.html call HTMLComments()
+   au BufNewFile *.pages call HTMLComments()
+	
+   " para las hojas de estilo
+   au BufNewFile *.css call CSSComments()
+	
+   " para los javascripts
+   au BufNewFile *.js call JSComments()
+	
+   " para los shells
+   au BufNewFile *.sh call SHELLComments()
+	
+   " para los sql
+   au BufNewFile *.sql call SQLComments()
+	
+   " para los pythones
+   au BufNewFile *.py call PYComments()
+	
+   " para los perl
+   au BufNewFile *.pl call PERLComments()
+	
+   " para los archivos de internacionalizacion
+   au BufNewFile *.po call POComments()
+	
+   " para los archivos de CSharp
+   au BufNewFile *.cs call CSHARPComments()
+	
+   " para los archivos de Conf
+   au BufNewFile *.cfg call CONFComments()
+   au BufNewFile *.conf call CONFComments()
+   au BufNewFile *.cnf call CONFComments()
+   au BufNewFile *.load call CONFComments()
+	
+   " para los archivos de Texto
+   au BufNewFile *.txt call TEXTComments()
+	
+	" para los updates del SubVersion
+	au BufNewFile,BufRead svn-commit.* setf svn
+
+  " para la licencia
+  au BufNewFile *.lic call LICENCEShow()
+ 
+endif
+
+" Agregar cabeceras para archivos en TEXT
+function! TEXTComments()
+
+  " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  execute "normal iTEXT \n"
+  execute "normal i vim: set ts=3 et sw=3 sts=3 si ai: \n"
+  execute "normal i \n"
+  execute "normal i " . filename . "\n"
+  execute "normal i ----------------------------------------------------------------------------\n"
+  execute "normal i (c) " . createdate . "\n"
+  execute "normal i " . username . " <" . email . ">\n"
+  execute "normal i All rights reserved.\n"
+	execute "normal i \n"
+  execute "normal i \n"
+  execute "normal i Abstract \n"
+  execute "normal i   -\n"
+  execute "normal i   -\n"
+  execute "normal i   -\n"
+  execute "normal i   -\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  normal 8k$
+
+endfunction
+
+
+
+" Agregar cabeceras para archivos en Conf
+function! CONFComments()
+
+  " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  execute "normal i# CONF \n"
+  execute "normal i# vim: set ts=3 et sw=3 sts=3 si ai: \n"
+  execute "normal i# \n"
+  execute "normal i# " . filename . "\n"
+  execute "normal i# =-=\n"
+  execute "normal i# Copyright " . createdate . " " . enterprise . " \n"
+  execute "normal i# " . username . " <" . email . ">\n"
+  execute "normal i# \n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  normal 2k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos en PHP
+function! PHPComments()
+
+  " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let website = expand("$MYWEBSITE")
+  let sysName = expand("$SYSNAME")
+  let sysDescription = expand("$SYSDESCRIPTION")
+  let filename = expand("%:t")
+  let creationfile = strftime("%F")
+  let createdate = strftime("%Y")
+
+  set comments=
+	execute "normal i<?PHP\n"
+	execute "normal i/* vim: set ts=2 sw=2 sts=2 et si ai: */\n\n" 
+	execute "normal i/**\n"
+  execute "normal i * " . filename . " \n"
+  execute "normal i * =\n"
+  execute "normal i * \n"
+  execute "normal i * " . username . " <" . email . ">\n"
+  execute "normal i * " . enterprise . "\n"
+  execute "normal i */ \n"
+	execute "normal i\n\n"
+	execute "normal i?>"
+	normal 2k$
+
+endfunction
+
+" Mostrar licencia
+function! LICENCEShow()
+	" Datos de usuario/email
+	let username = expand("$MYUSER")
+	let email = expand("$MYEMAIL")
+	let enterprise = expand("$MYENTERPRISE")
+	let website = expand("$MYWEBSITE")
+	let sysName = expand("$SYSNAME")
+	let sysDescription = expand("$SYSDESCRIPTION")
+	let filename = expand("%:t")
+	let creationfile = strftime("%F")
+	let createdate = strftime("%Y")
+	set comments=
+	set tabstop=2
+	set shiftwidth=2
+	set softtabstop=2
+	set expandtab 
+	set listchars=tab:>-,eol:$,trail:_,extends:>,precedes:<
+
+  execute "normal i# Copyright (c) " . createdate . ">\n"
+  execute "normal i# " . username . " <" . email . ">\n"
+  execute "normal i# All rights reserved.\n"
+  execute "normal i# \n"
+  execute "normal i# Redistribution and use in source and binary forms, with or without\n"
+  execute "normal i# modification, are permitted provided that the following conditions\n"
+  execute "normal i# are met:\n"
+  execute "normal i# 1. Redistributions  of  source code  must retain the above copyright notice,\n"
+  execute "normal i#    this list of conditions and the following disclaimer.\n"
+  execute "normal i# 2. Redistributions  in binary form must reproduce the above copyright notice\n"
+  execute "normal i#    this list of conditions and the following disclaimer in the documentation\n"
+  execute "normal i#    and/or other materials provided with the distribution.\n"
+  execute "normal i# 3. Neither the name  of copyright holders nor the names  of its contributors\n"
+  execute "normal i#    may be used  to endorse  or promote  products  derived from this software\n"
+  execute "normal i#    without specific prior written permission.\n"
+  execute "normal i# \n"
+  execute "normal i# THIS SOFTWARE  IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 'AS IS'\n"
+  execute "normal i# AND ANY  EXPRESS OR IMPLIED  WARRANTIES,  INCLUDING, BUT NOT LIMITED TO, THE\n"
+  execute "normal i# IMPLIED WARRANTIES  OF MERCHANTABILITY AND  FITNESS FOR A PARTICULAR PURPOSE\n"
+  execute "normal i# ARE DISCLAIMED.  IN  NO  EVENT  SHALL  COPYRIGHT  HOLDERS OR CONTRIBUTORS BE\n"
+  execute "normal i# LIABLE   FOR  ANY  DIRECT,  INDIRECT,  INCIDENTAL,  SPECIAL,  EXEMPLARY,  OR\n"
+  execute "normal i# CONSEQUENTIAL   DAMAGES  (INCLUDING,  BUT  NOT  LIMITED  TO,  PROCUREMENT OF\n"
+  execute "normal i# SUBSTITUTE  GOODS  OR  SERVICES;  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\n"
+  execute "normal i# INTERRUPTION)  HOWEVER  CAUSED  AND  ON  ANY THEORY OF LIABILITY, WHETHER IN\n"
+  execute "normal i# CONTRACT,  STRICT  LIABILITY,  OR  TORT (INCLUDING  NEGLIGENCE OR OTHERWISE)\n"
+  execute "normal i# ARISING IN ANY WAY OUT OF THE USE OF THIS  SOFTWARE,  EVEN IF ADVISED OF THE\n"
+  execute "normal i# POSSIBILITY OF SUCH DAMAGE.\n"
+  execute "normal i\n "
+
+endfunction
+
+" Agregar cabeceras para archivos en RUBY
+function! RUBYComments()
+	" Datos de usuario/email
+	let username = expand("$MYUSER")
+	let email = expand("$MYEMAIL")
+	let enterprise = expand("$MYENTERPRISE")
+	let website = expand("$MYWEBSITE")
+	let sysName = expand("$SYSNAME")
+	let sysDescription = expand("$SYSDESCRIPTION")
+	let filename = expand("%:t")
+	let creationfile = strftime("%F")
+	let createdate = strftime("%Y")
+	set comments=
+	set tabstop=2
+	set shiftwidth=2
+	set softtabstop=2
+	set expandtab 
+	set listchars=tab:>-,eol:$,trail:_,extends:>,precedes:<
+
+	execute "normal i#!/usr/bin/env ruby \n" 
+	execute "normal i# vim: set ts=2 sw=2 sts=2 et si ai: \n" 
+	execute "normal i\n"
+  execute "normal i# " . filename . " \n"
+  execute "normal i# =\n"
+  execute "normal i# \n"
+  execute "normal i# " . username . " <" . email . ">\n"
+  execute "normal i# " . enterprise . "\n"
+  execute "normal i# \n"
+	execute "normal i\n\n"
+	execute "normal i# "
+	normal 2k$
+
+endfunction
+
+
+
+" Agregar cabeceras para archivos en PHP
+function! JAVAComments()
+
+  " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let website = expand("$MYWEBSITE")
+  let sysName = expand("$SYSNAME")
+  let sysDescription = expand("$SYSDESCRIPTION")
+  let filename = expand("%:t")
+  let creationfile = strftime("%F")
+  let createdate = strftime("%Y")
+
+  set comments=
+	execute "normal i/* JAVA App */\n"
+	execute "normal i/* vim: set ts=3 sw=3 sts=3 si ai: */\n" 
+	execute "normal i\n"
+	execute "normal i/* " . sysName . " :: " . sysDescription . " \n"
+	execute "normal i * \n"
+	execute "normal i * @author       " . username . "  <" . email . "> \n"
+	execute "normal i * @package      " . sysName . "\n"
+	execute "normal i * @copyright    Copyright " . createdate . " " . enterprise . "	\n"
+	execute "normal i * @filesource   \n"
+	execute "normal i * \n"
+	execute "normal i */\n"
+	execute "normal i\n\n"
+	execute "normal i/* " . filename . " :: --here short description--\n"
+	execute "normal i * \n"
+	execute "normal i * --long description--\n"
+	execute "normal i * \n"
+	execute "normal i * @author       " . username . "  <" . email . "> \n"
+	execute "normal i * @package      ".sysName."\n"
+	execute "normal i * @subpackage   \n"
+	execute "normal i * @category     \n"
+	execute "normal i * @version      $Id: vimrc.local 39 2008-05-10 06:44:21Z andresaquino $\n"
+	execute "normal i * \n"
+	execute "normal i */\n\n\n\n\n\n"
+	normal 6k$
+
+endfunction
+
+
+
+" Agregar cabeceras para archivos en HTML
+function! HTMLComments()
+  " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let createdate = strftime("%Y")
+
+  execute "normal i<html>\n"
+  execute "normal i<head>\n"
+  execute "normal i</head>\n"
+  execute "normal i<body>\n\n"
+  execute "normal i</body>\n"
+  execute "normal i</html>\n"
+  execute "normal i<!-- vim: set ts=3 sw=3 sts=3 si ai: -->"
+  normal 3k$
+endfunction
+
+
+" Agregar cabeceras para archivos en SHELL
+function! SHELLComments()
+   
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let website = expand("$MYWEBSITE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+  set comments=
+	set tabstop=2
+	set shiftwidth=2
+	set softtabstop=2
+	set expandtab 
+	set listchars=tab:>-,eol:$,trail:_,extends:>,precedes:<
+
+  execute "normal i#!/bin/sh \n"
+	execute "normal i# vim: set ts=2 sw=2 sts=2 et si ai: \n" 
+	execute "normal i\n"
+  execute "normal i# " . filename . " \n"
+  execute "normal i# =\n"
+  execute "normal i# \n"
+  execute "normal i# " . username . " <" . email . ">\n"
+  execute "normal i# " . enterprise . "\n"
+  execute "normal i# \n"
+	execute "normal i\n\n"
+	execute "normal i# "
+	normal 2k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos en SQL
+function! SQLComments()
+
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let website = expand("$MYWEBSITE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  execute "normal i-- SQL \n"
+  execute "normal i-- vim: set ts=3 sw=3 sts=3 si ai: \n"
+  execute "normal i-- \n"
+  execute "normal i-- " . filename . "\n"
+  execute "normal i-- -----------------------------------------------------------------------------\n"
+  execute "normal i-- \n"
+  execute "normal i-- \n"
+  execute "normal i-- " . username . " <" . email . ">\n"
+  execute "normal i-- \n"
+  execute "normal i-- Creation      :  " . creationfile . "\n"
+  execute "normal i-- \n"
+  execute "normal i-- (c) " . createdate . " " . enterprise . "\n"
+  execute "normal i-- \n"
+  execute "normal i-- Abstract \n"
+  execute "normal i--   \n"
+  execute "normal i--   \n"
+  execute "normal i--   \n"
+  execute "normal i--   \n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i--"
+  normal 6k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos en CSS
+function! CSSComments()
+
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  execute "normal i/* CSS \n"
+  execute "normal ivim: set ts=3 sw=3 sts=3 si ai: \n"
+  execute "normal i\n"
+  execute "normal i" . filename . "\n"
+  execute "normal i=-=\n"
+  execute "normal i" . createdate . ", " . enterprise . "\n"
+  execute "normal i" . username . " <" . email . ">\n"
+  execute "normal iAll rights reserved.\n"
+  execute "normal i*/\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i/**/"
+  normal 6k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos en JS
+function! JSComments()
+
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  execute "normal i/* JS \n"
+  execute "normal i#  vim: set ts=3 et sw=3 sts=3 si ai: \n"
+  execute "normal i#  \n"
+  execute "normal i#  " . filename . "\n"
+  execute "normal i# ----------------------------------------------------------------------------\n"
+  execute "normal i#  \n"
+  execute "normal i#  \n"
+  execute "normal i#  " . username . " <" . email . ">\n"
+  execute "normal i#  \n"
+  execute "normal i#  Creation      :  " . creationfile . "\n"
+  execute "normal i#  \n"
+  execute "normal i#  $Id: vimrc.local 39 2008-05-10 06:44:21Z andresaquino $\n"
+  execute "normal i#  \n"
+  execute "normal i#  $URL$\n"
+  execute "normal i#  \n"
+  execute "normal i#  (c) " . createdate . " " . enterprise . "\n"
+  execute "normal i#  \n"
+  execute "normal i#  Abstract \n"
+  execute "normal i#    \n"
+  execute "normal i#    \n"
+  execute "normal i#    \n"
+  execute "normal i*/\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i/**/"
+  normal 6k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos en PYTHON
+function! PYComments()
+
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  execute "normal i#!/usr/bin/env python \n"
+	execute "normal i# vim: set ts=3 sw=3 sts=3 si ai: \n" 
+	execute "normal i\n"
+  execute "normal i# " . filename . " \n"
+  execute "normal i# =\n"
+  execute "normal i# \n"
+  execute "normal i# " . username . " <" . email . ">\n"
+  execute "normal i# " . enterprise . "\n"
+  execute "normal i# \n"
+	execute "normal i\n\n"
+	execute "normal i# "
+	normal 2k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos en PERL
+function! PERLComments()
+
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  set comments=
+  execute "normal i#!/usr/bin/env perl \n"
+	execute "normal i# vim: set ts=2 sw=2 sts=2 et si ai: \n" 
+	execute "normal i\n"
+  execute "normal i# " . filename . " -- put here a short description \n"
+  execute "normal i# =-=\n"
+  execute "normal i# " . createdate . ", " . enterprise . "\n"
+  execute "normal i# " . username . " <" . email . ">\n"
+  execute "normal i# All rights reserved.\n"
+  execute "normal i# \n"
+	execute "normal i\n\n"
+	execute "normal i# "
+	normal 2k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos de INTERNACIONALIZACION
+function! POComments()
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  set comments=
+  execute "normal i# PO file \n"
+  execute "normal i# vim: set ts=3 sw=3 sts=3 si ai et: \n"
+  execute "normal i# \n"
+  execute "normal i# " . filename . "\n"
+  execute "normal i# =-=\n"
+  execute "normal i# " . createdate . ", " . enterprise . "\n"
+  execute "normal i# " . username . " <" . email . ">\n"
+  execute "normal i# All rights reserved.\n"
+  execute "normal i# \n"
+	execute "normal i\n\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i#"
+  normal 3k$
+
+endfunction
+
+
+" Agregar cabeceras para archivos en SQL
+function! CSHARPComments()
+
+   " Datos de usuario/email
+  let username = expand("$MYUSER")
+  let email = expand("$MYEMAIL")
+  let enterprise = expand("$MYENTERPRISE")
+  let filename = expand("%:t")
+  let creationfile = strftime("%c")
+  let createdate = strftime("%Y")
+
+  set comments=
+  execute "normal i// C# \n"
+  execute "normal i// vim: set ts=3 sw=3 sts=3 si ai: \n"
+  execute "normal i/* \n"
+  execute "normal i * " . filename . "\n"
+  execute "normal i * -----------------------------------------------------------------------------\n"
+  execute "normal i * \n"
+  execute "normal i * \n"
+  execute "normal i * " . username . " <" . email . ">\n"
+  execute "normal i * \n"
+  execute "normal i * Creation      :  " . creationfile . "\n"
+  execute "normal i * \n"
+  execute "normal i * (c) " . createdate . " " . enterprise . "\n"
+  execute "normal i * \n"
+  execute "normal i * Abstract \n"
+  execute "normal i *   \n"
+  execute "normal i *   \n"
+  execute "normal i *   \n"
+  execute "normal i */\n"
+  execute "normal i\n"
+  execute "normal iusing System;\n"
+  execute "normal i\n"
+  execute "normal i\n"
+  execute "normal i//"
+  normal 8k$
+
+endfunction
+
+

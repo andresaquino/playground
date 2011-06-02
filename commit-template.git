@@ -1,0 +1,13 @@
+
+<Flag>: <Description>
+
+# Please, use the next flags
+# =
+#	DEFECT         : Report a Software Defect
+# ENHANCEMENT    : Request for a Enhancement
+# TASK           : Work item that change code or documentation
+# REVIEW         : Request for a source code review
+# OTHER          : Some other kind of issue
+
+# Tip: f< - ca< - ;
+#

@@ -1,0 +1,40 @@
+# .screenrc 
+# vim: set et ts=2 sw=2 sts=2 si ai: 
+
+# .screenrc -- screen rc file configuration
+# =-=
+# Mainteiner
+# Andres Aquino Morales <andres.aquino@gmail.com>
+# 
+
+#
+# let's override 
+startup_message off
+vbell off
+msgwait 1
+hardstatus alwayslastline
+#termcapinfo xterm* ti@:te@
+altscreen on
+shell -$SHELL
+defutf8 on
+
+#
+# Log 10000 lines
+defscrollback 100000
+
+# keybindings
+bindkey -k k3 prev                        # F3  | Previous Window
+bindkey -k k4 next                        # F4  | Next Window
+register r "^a:source $HOME/.screenrc"    #     | Goes with F5 definition
+bindkey -k k5 process r                   # F5  | Reload profile
+bindkey -k k6 detach                      # F6  | Detach from this session
+
+# Window tabs, second to last line
+caption always '%{= WK}%?%-Lw%?%{K}(%{k}%n*%f%t%?(%u)%?%{K})%{K}%?%+Lw%?%?%= %{k}'
+
+#
+# Status string, last line
+hardstatus string '%{Wk}%{R}${MYENTERPRISE}%{= Wk} %100`%120`%= %100`%120`%D|%Y.%m.%d~%0c:%s'
+
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+
