@@ -4,9 +4,10 @@
 " vimrc - configuracion del editor VIM
 " =
 "
-" Andres Aquino <andres.aquino@gmail.com>
-" StrategyLabs!
-"
+" Andres Aquino <aquino(at)hp.com>
+" Hewlett-Packard Company
+" 
+
 " Notes:
 " 1- use what ever you want for indenting, but use spaces for aligning
 " 2- indent !
