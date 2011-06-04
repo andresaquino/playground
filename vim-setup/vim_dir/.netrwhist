@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/home/andresaquino/Dropbox/nextel.com.mx/monopse.git/man1'
 let g:netrw_dirhist_2='/Volumes/Users/andresaquino/Dropbox/nextel.com.mx/shelltemplate.git'
 let g:netrw_dirhist_3='/Volumes/Users/andresaquino/Dropbox/nextel.com.mx/shelltemplate.git/conf'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/Volumes/Users/andresaquino/Dropbox/nextel.com.mx/shellte
 let g:netrw_dirhist_5='/Volumes/Users/andresaquino/Dropbox/nextel.com.mx/shelltemplate.git/bin'
 let g:netrw_dirhist_6='/Volumes/Users/andresaquino/Dropbox/nextel.com.mx/shelltemplate.git'
 let g:netrw_dirhist_7='/Volumes/Users/andresaquino/Dropbox/nextel.com.mx/shelltemplate.git/utils'
+let g:netrw_dirhist_8='/Volumes/Users/andresaquino/Dropbox/unitec.mx'

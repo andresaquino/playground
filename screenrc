@@ -1,10 +1,11 @@
 # .screenrc 
 # vim: set et ts=2 sw=2 sts=2 si ai: 
 
-# .screenrc -- screen rc file configuration
-# =-=
-# Mainteiner
-# Andres Aquino Morales <andres.aquino@gmail.com>
+# .screenrc 
+# =
+#
+# Andres Aquino <aquino(at)hp.com>
+# Hewlett-Packard Company
 # 
 
 #
