@@ -19,7 +19,7 @@ _UHOUR=`date "+%H%M"`
 _UNAME="Andres Aquino"
 _UMAIL="aquino(at)hp.com"
 _UWORK="Hewlett-Packard Company"
-_UDEBG=true
+_UDEBG=false
 
 # set environment
 loadenvironment()
@@ -43,7 +43,6 @@ loadenvironment()
   [ -d /usr/bin ] && PATH=/usr/bin:${PATH}
   [ -d /sbin ] && PATH=/sbin:${PATH}
   [ -d /bin ] && PATH=/bin:${PATH}
-  _PATH=${PATH}
 
   ${_UDEBG} && printto "> Loading environment"
   
@@ -278,7 +277,7 @@ version ()
 {
   FPROF=`basename ~/host.info`
   RELEASE=`openssl dgst -md5 ${FPROF} | rev | cut -c-4`
-  printto "Profile ver. (${RELEASE}) \n${_UWORK}"
+  printto "Profile ver. (${RELEASE}) \n${_UWORK} \n\nCoded by Andres Aquino <aquino(at)hp.com>"
 }
 
 # set environment
@@ -289,6 +288,7 @@ loadprofile ~/host.info
 loadprofile ~/git.profile
 loadprofile ~/${HOSTNAME}.profile
 loadprofile ~/bscswp8.profile
+_PATH=${PATH}
 
 # Cursor and profile
 localpaths
