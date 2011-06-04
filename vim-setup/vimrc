@@ -149,9 +149,9 @@ endif
 function! TEXTComments()
 
   " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
@@ -183,9 +183,9 @@ endfunction
 function! CONFComments()
 
   " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
@@ -210,9 +210,9 @@ endfunction
 function! PHPComments()
 
   " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let website = expand("$MYWEBSITE")
   let sysName = expand("$SYSNAME")
   let sysDescription = expand("$SYSDESCRIPTION")
@@ -239,9 +239,9 @@ endfunction
 " Mostrar licencia
 function! LICENCEShow()
 	" Datos de usuario/email
-	let username = expand("$MYUSER")
-	let email = expand("$MYEMAIL")
-	let enterprise = expand("$MYENTERPRISE")
+	let username = expand("$_USERNAME")
+	let email = expand("$_USERMAIL")
+	let enterprise = expand("$_USERWORK")
 	let website = expand("$MYWEBSITE")
 	let sysName = expand("$SYSNAME")
 	let sysDescription = expand("$SYSDESCRIPTION")
@@ -289,9 +289,9 @@ endfunction
 " Agregar cabeceras para archivos en RUBY
 function! RUBYComments()
 	" Datos de usuario/email
-	let username = expand("$MYUSER")
-	let email = expand("$MYEMAIL")
-	let enterprise = expand("$MYENTERPRISE")
+	let username = expand("$_USERNAME")
+	let email = expand("$_USERMAIL")
+	let enterprise = expand("$_USERWORK")
 	let website = expand("$MYWEBSITE")
 	let sysName = expand("$SYSNAME")
 	let sysDescription = expand("$SYSDESCRIPTION")
@@ -326,9 +326,9 @@ endfunction
 function! JAVAComments()
 
   " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let website = expand("$MYWEBSITE")
   let sysName = expand("$SYSNAME")
   let sysDescription = expand("$SYSDESCRIPTION")
@@ -369,9 +369,9 @@ endfunction
 " Agregar cabeceras para archivos en HTML
 function! HTMLComments()
   " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let createdate = strftime("%Y")
 
@@ -390,9 +390,9 @@ endfunction
 function! SHELLComments()
    
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let website = expand("$MYWEBSITE")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
@@ -424,9 +424,9 @@ endfunction
 function! SQLComments()
 
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let website = expand("$MYWEBSITE")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
@@ -463,9 +463,9 @@ endfunction
 function! CSSComments()
 
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
@@ -491,9 +491,9 @@ endfunction
 function! JSComments()
 
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
@@ -533,9 +533,9 @@ endfunction
 function! PYComments()
 
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
@@ -560,9 +560,9 @@ endfunction
 function! PERLComments()
 
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
@@ -587,9 +587,9 @@ endfunction
 " Agregar cabeceras para archivos de INTERNACIONALIZACION
 function! POComments()
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
@@ -617,9 +617,9 @@ endfunction
 function! CSHARPComments()
 
    " Datos de usuario/email
-  let username = expand("$MYUSER")
-  let email = expand("$MYEMAIL")
-  let enterprise = expand("$MYENTERPRISE")
+  let username = expand("$_USERNAME")
+  let email = expand("$_USERMAIL")
+  let enterprise = expand("$_USERWORK")
   let filename = expand("%:t")
   let creationfile = strftime("%c")
   let createdate = strftime("%Y")
