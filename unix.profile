@@ -278,7 +278,7 @@ cmdstyle ()
 # Shows MD5 of this profile
 version () 
 {
-  FPROF=`basename ~/host.info`
+  FPROF=${HOME}/host.info
   RELEASE=`openssl dgst -md5 ${FPROF} | rev | cut -c-4`
   printto "Profile ver. (${RELEASE}) \n${_UWORK} \n\nCoded by Andres Aquino <aquino(at)hp.com>"
 }
