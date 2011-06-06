@@ -144,14 +144,6 @@ loadenvironment()
  
 }
 
-loadprofile()
-{
-  local uprofile=${1}
-  [ -s ${uprofile} ] && . ${uprofile} > /dev/null 2>&1
-  ${_UDEBG} && printto "> Load profile ${uprofile}"
-
-}
-
 # Prints a message 
 printto()
 {
@@ -175,6 +167,17 @@ printto()
       ${_echo} "${message} "
     ;;
   esac
+
+}
+
+loadprofile()
+{
+  local uprofile=${1}
+  if [ -s ${uprofile} ]
+  then
+    . ${uprofile} > /dev/null 2>&1
+    ${_UDEBG} && printto "> Load profile ${uprofile}"
+  fi
 
 }
 
